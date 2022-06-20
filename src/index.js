@@ -1,25 +1,47 @@
 import configureStore from './store/configureStore';
-import {
-  bugAdded,
-  bugResolved,
-  bugRemoved,
-  getUnresolvedBugs,
-  bugAssignedToUser,
-  getBugsByUser,
-} from './store/bugs';
-import {
-  projectAdded,
-  projectCompleted,
-  projectRemoved,
-} from './store/projects';
-import { userAdded } from './store/users';
+import { loadBugs, assignBugToUser } from './store/bugs';
+
 const store = configureStore();
+//UI Layer
+store.dispatch(loadBugs());
+setTimeout(() => store.dispatch(assignBugToUser(1, 3)), 2000);
+//store.dispatch(assignBug({ userId: '1', id: '1' }));
+//store.dispatch(addBug({ description: 'a' }));
+//setTimeout(() => store.dispatch(loadBugs()), 2000);
+//setTimeout(() => store.dispatch(loadBugs()), 4000);
 
-store.subscribe(() => {
-  console.log('Store Changed!');
-});
+// ////////////////////////////////////////////////////////////////////////////////
 
-store.dispatch(userAdded({ name: 'User1' }));
+// store.dispatch({
+//   type: 'apiCallBegan',
+//   payload: {
+//     url: '/bugs',
+//     onSuccess: 'bugsReceived',
+//     onError: 'apiRequestFailed',
+//   },
+// });
+
+// import {
+//   bugAdded,
+//   bugResolved,
+//   bugRemoved,
+//   getUnresolvedBugs,
+//   bugAssignedToUser,
+//   getBugsByUser,
+// } from './store/bugs';
+// import {
+//   projectAdded,
+//   projectCompleted,
+//   projectRemoved,
+// } from './store/projects';
+// import { userAdded } from './store/users';
+// const store = configureStore();
+
+// store.subscribe(() => {
+//   console.log('Store Changed!');
+// });
+
+// store.dispatch(userAdded({ name: 'User1' }));
 // store.dispatch(userAdded({ name: 'User2' }));
 
 // store.dispatch(projectAdded({ name: 'Project 1' }));
